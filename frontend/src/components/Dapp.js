@@ -72,8 +72,8 @@ export class Dapp extends React.Component {
     // clicks a button. This callback just calls the _connectWallet method.
     if (!this.state.selectedAddress) {
       return (
-        <ConnectWallet 
-          connectWallet={() => this._connectWallet()} 
+        <ConnectWallet
+          connectWallet={() => this._connectWallet()}
           networkError={this.state.networkError}
           dismiss={() => this._dismissNetworkError()}
         />
@@ -94,6 +94,9 @@ export class Dapp extends React.Component {
             <h1>
               {this.state.tokenData.name} ({this.state.tokenData.symbol})
             </h1>
+            <p>
+              Total Supply: <b>{this.state.tokenData.totalSupply.toString()}</b>
+            </p>
             <p>
               Welcome <b>{this.state.selectedAddress}</b>, you have{" "}
               <b>
@@ -190,7 +193,7 @@ export class Dapp extends React.Component {
       if (newAddress === undefined) {
         return this._resetState();
       }
-      
+
       this._initialize(newAddress);
     });
   }
@@ -250,8 +253,9 @@ export class Dapp extends React.Component {
   async _getTokenData() {
     const name = await this._token.name();
     const symbol = await this._token.symbol();
+    const totalSupply = await this._token.getTotalSupply();
 
-    this.setState({ tokenData: { name, symbol } });
+    this.setState({ tokenData: { name, symbol, totalSupply } });
   }
 
   async _updateBalance() {

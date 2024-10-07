@@ -66,6 +66,8 @@ contract Token {
         emit Transfer(msg.sender, to, amount);
     }
 
+    
+
     /**
      * Read only function to retrieve the token balance of a given account.
      *
@@ -75,6 +77,8 @@ contract Token {
     function balanceOf(address account) external view returns (uint256) {
         return balances[account];
     }
+
+    
 
     // เขียนฟังก์ชันสำหรับแสดงข้อมูล totalSupply ด้านล่างและเรียกใช้งานเพื่อแสดงให้หน้าแรกของ UI
 }
